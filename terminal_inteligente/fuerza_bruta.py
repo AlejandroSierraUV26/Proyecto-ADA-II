@@ -3,14 +3,14 @@ def fuerza_bruta(palabra1, palabra2, costos, i, j):
         return 0, []
     
     if i == len(palabra1):
-        return (len(palabra2) - j) * costos['insertar'], ["Insertar"] * (len(palabra2) - j)
+        return (len(palabra2) - j) * costos['insertar'], ["Insertar ({}): {}".format(palabra2[j], costos['insertar']) for j in range(j, len(palabra2))]
     
     if j == len(palabra2):
-        return (len(palabra1) - i) * costos['borrar'], ["Borrar"] * (len(palabra1) - i)
+        return (len(palabra1) - i) * costos['borrar'], ["Borrar ({}): {}".format(palabra1[i], costos['borrar']) for i in range(i, len(palabra1))]
     
     if palabra1[i] == palabra2[j]:
         costo, acciones = fuerza_bruta(palabra1, palabra2, costos, i + 1, j + 1)
-        return costo, ["Avanzar ({} == {})".format(palabra1[i], palabra2[j])] + acciones
+        return costo + costos['avanzar'], ["Avanzar ({} == {}) -> {}".format(palabra1[i], palabra2[j], costos['avanzar'])] + acciones
     
     costo_reemplazar, acciones_reemplazar = fuerza_bruta(palabra1, palabra2, costos, i + 1, j + 1)
     costo_reemplazar += costos['reemplazar']
@@ -22,11 +22,11 @@ def fuerza_bruta(palabra1, palabra2, costos, i, j):
     costo_borrar += costos['borrar']
     
     if costo_reemplazar <= costo_insertar and costo_reemplazar <= costo_borrar:
-        return costo_reemplazar, ["Reemplazar ({} -> {})".format(palabra1[i], palabra2[j])] + acciones_reemplazar
+        return costo_reemplazar, ["Reemplazar ({} -> {}) -> {}".format(palabra1[i], palabra2[j], costos['reemplazar'])] + acciones_reemplazar
     elif costo_insertar <= costo_reemplazar and costo_insertar <= costo_borrar:
-        return costo_insertar, ["Insertar"] + acciones_insertar
+        return costo_insertar, ["Insertar ({}) -> {}".format(palabra2[j], costos['insertar'])] + acciones_insertar
     else:
-        return costo_borrar, ["Borrar"] + acciones_borrar
+        return costo_borrar, ["Borrar ({}) -> {}".format(palabra1[i], costos['borrar'])] + acciones_borrar
 
 def solucion_fuerza_bruta(palabra1, palabra2, costos):
     costo, acciones = fuerza_bruta(palabra1, palabra2, costos, 0, 0)
@@ -34,16 +34,3 @@ def solucion_fuerza_bruta(palabra1, palabra2, costos):
     for accion in acciones:
         print(accion)
     return costo
-
-
-palabra1 = "ingeniero"
-palabra2 = "ingenioso"
-costos = {
-    'avanzar': 1,
-    'borrar': 2,
-    'insertar': 2,
-    'reemplazar': 3,
-    'destruir': 1
-}
-
-print("Costo mínimo con fuerza bruta:", solucion_fuerza_bruta(palabra1, palabra2, costos))
