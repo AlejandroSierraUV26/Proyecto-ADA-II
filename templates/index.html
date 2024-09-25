@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparación de Algoritmos</title>
+</head>
+<body>
+    <h1>Comparación de Algoritmos de Edición de Palabras</h1>
+    <form method="POST">
+        <label for="palabra1">Palabra Inicial:</label>
+        <input type="text" id="palabra1" name="palabra1" required><br>
+
+        <label for="palabra2">Palabra Final:</label>
+        <input type="text" id="palabra2" name="palabra2" required><br>
+
+        <h3>Defina los Costos:</h3>
+        <label for="costo_avanzar">Costo de Avanzar:</label>
+        <input type="number" id="costo_avanzar" name="costo_avanzar" value="1"><br>
+
+        <label for="costo_borrar">Costo de Borrar:</label>
+        <input type="number" id="costo_borrar" name="costo_borrar" value="2"><br>
+
+        <label for="costo_insertar">Costo de Insertar:</label>
+        <input type="number" id="costo_insertar" name="costo_insertar" value="2"><br>
+
+        <label for="costo_reemplazar">Costo de Reemplazar:</label>
+        <input type="number" id="costo_reemplazar" name="costo_reemplazar" value="3"><br>
+
+        <label for="costo_destruir">Costo de Destruir:</label>
+        <input type="number" id="costo_destruir" name="costo_destruir" value="1"><br>
+
+        <button type="submit">Calcular</button>
+    </form>
+
+    {% if palabra1 and palabra2 %}
+        <h2>Resultados:</h2>
+        <p>Palabra Inicial: {{ palabra1 }}</p>
+        <p>Palabra Final: {{ palabra2 }}</p>
+        <h3>Costos:</h3>
+        <ul>
+            <li>Avanzar: {{ costos.avanzar }}</li>
+            <li>Borrar: {{ costos.borrar }}</li>
+            <li>Insertar: {{ costos.insertar }}</li>
+            <li>Reemplazar: {{ costos.reemplazar }}</li>
+            <li>Destruir: {{ costos.destruir }}</li>
+        </ul>
+        <ul>
+            <li>Costo Fuerza Bruta: {{ resultado_fb }}</li>
+            <ul>
+                {% for accion in acciones_fb %}
+                    <li>{{ accion }}</li>
+                {% endfor %}
+            </ul>
+            <li>Costo Voraz: {{ resultado_vz }}</li>
+            <ul>
+                {% for accion in acciones_vz %}
+                    <li>{{ accion }}</li>
+                {% endfor %}
+            </ul>
+            <li>Costo Programación Dinámica: {{ resultado_pd }}</li>
+            <ul>
+                {% for accion in acciones_pd %}
+                    <li>{{ accion }}</li>
+                {% endfor %}
+            </ul>
+        </ul>
+    {% endif %}
+</body>
+</html>

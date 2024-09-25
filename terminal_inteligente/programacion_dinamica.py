@@ -1,6 +1,6 @@
 import numpy as np
 
-def solucion_dinamica(palabra1, palabra2, costos):
+def solucion_dinamica(palabra1, palabra2, costos, acc = 0):
     n = len(palabra1)
     m = len(palabra2)
     
@@ -43,15 +43,8 @@ def solucion_dinamica(palabra1, palabra2, costos):
             else:
                 dp[i][j] = costo_reemplazar
                 acciones[i][j] = accion_reemplazar
-    
-    return dp[n][m], acciones
-
-def secuancia_acciones(palabra1, palabra2, costos):
     n = len(palabra1)
     m = len(palabra2)
-    
-    _, acciones = solucion_dinamica(palabra1, palabra2, costos)
-    
     secuencia_acciones = []
     i, j = n, m
     while i > 0 or j > 0:
@@ -66,8 +59,9 @@ def secuancia_acciones(palabra1, palabra2, costos):
             j -= 1
     
     secuencia_acciones.reverse()
-    
-    return secuencia_acciones
-
-
+    if acc == 1:
+        return secuencia_acciones
+    elif acc == 2:
+        return dp[n][m], secuencia_acciones
+    return dp[n][m]
 

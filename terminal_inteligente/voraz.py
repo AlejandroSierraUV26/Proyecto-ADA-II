@@ -33,4 +33,6 @@ def solucion_voraz(palabra1, palabra2, costos, acc = 0):
     #     print(accion)
     if acc == 1:
         return acciones
+    elif acc == 2:
+        return costo_total, acciones
     return costo_total
