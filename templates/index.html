@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    
     <div class="container">
         <h1>Comparación de Algoritmos de Edición de Palabras</h1>
         <form method="POST">
@@ -40,46 +39,44 @@
             </div>
         </form>
 
-      {% if palabra1 and palabra2 %}
-    <script>
-        // Pasar las palabras inicial y final desde Jinja a JavaScript
-        const initialWord = "{{ palabra1 }}";
-        const finalWord = "{{ palabra2 }}";
+        {% if palabra1 and palabra2 %}
+        <script>
+            // Pasar las palabras inicial y final desde Jinja a JavaScript
+            const initialWord = "{{ palabra1 }}";
+            const finalWord = "{{ palabra2 }}";
 
-        // Pasar los datos de acciones de los algoritmos desde Jinja a JavaScript
-        const steps = {
-            fb: {{ acciones_fb | tojson | safe }},
-            vz: {{ acciones_vz | tojson | safe }},
-            pd: {{ acciones_pd | tojson | safe }}
-        };
-    </script>
+            // Pasar los datos de acciones de los algoritmos desde Jinja a JavaScript
+            const steps = {
+                fb: {{ acciones_fb | tojson | safe }},
+                vz: {{ acciones_vz | tojson | safe }},
+                pd: {{ acciones_pd | tojson | safe }}
+            };
+        </script>
 
-            <h2>Resultados:</h2>
-            <div class="results">
-                <div class="result-column">
-                    <h3>Fuerza Bruta</h3>
-                    <p>Costo: {{ resultado_fb }}</p>
-                    <button onclick="startSimulation('fb')">Simular</button>
-                    <div id="sim-fb" class="simulation"></div>
-                    <div id="chain-fb" class="chain"></div> <!-- Contenedor para la palabra en evolución -->
-                </div>
-                
-                <div class="result-column">
-                    <h3>Voraz</h3>
-                    <p>Costo: {{ resultado_vz }}</p>
-                    <button onclick="startSimulation('vz')">Simular</button>
-                    <div id="sim-vz" class="simulation"></div>
-                    <div id="chain-vz" class="chain"></div> <!-- Contenedor para la palabra en evolución -->
-                </div>
-                
-                <div class="result-column">
-                    <h3>Programación Dinámica</h3>
-                    <p>Costo: {{ resultado_pd }}</p>
-                    <button onclick="startSimulation('pd')">Simular</button>
-                    <div id="sim-pd" class="simulation"></div>
-                    <div id="chain-pd" class="chain"></div> <!-- Contenedor para la palabra en evolución -->
-                </div>                
+        <h2>Resultados:</h2>
+        <div class="results">
+            <div class="result-column">
+                <h3>Fuerza Bruta</h3>
+                <p>Costo: {{ resultado_fb }}</p>
+                <button onclick="startSimulation('fb')">Simular</button>    
+                <div id="resultado-fb" class="resultado"></div> <!-- Contenedor para el resultado de la simulación -->
+
             </div>
+            
+            <div class="result-column">
+                <h3>Voraz</h3>
+                <p>Costo: {{ resultado_vz }}</p>
+                <button onclick="startSimulation('vz')">Simular</button>
+                <div id="resultado-vz" class="resultado"></div> <!-- Contenedor para el resultado de la simulación -->
+            </div>
+            
+            <div class="result-column">
+                <h3>Programación Dinámica</h3>
+                <p>Costo: {{ resultado_pd }}</p>
+                <button onclick="startSimulation('pd')">Simular</button>
+                <div id="resultado-pd" class="resultado"></div> <!-- Contenedor para el resultado de la simulación -->
+            </div>                
+        </div>
         {% endif %}
     </div>
 

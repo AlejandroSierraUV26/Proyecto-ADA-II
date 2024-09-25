@@ -2,13 +2,13 @@ def fuerza_bruta(palabra1, palabra2, costos, i, j):
     if i == len(palabra1) and j == len(palabra2):
         return 0, []
     
-    if i == len(palabra1):
+    elif i == len(palabra1):
         return (len(palabra2) - j) * costos['insertar'], ["Insertar ({})-> {}".format(palabra2[j], costos['insertar']) for j in range(j, len(palabra2))]
     
-    if j == len(palabra2):
+    elif j == len(palabra2):
         return (len(palabra1) - i) * costos['borrar'], ["Borrar ({})-> {}".format(palabra1[i], costos['borrar']) for i in range(i, len(palabra1))]
     
-    if palabra1[i] == palabra2[j]:
+    elif palabra1[i] == palabra2[j]:
         costo, acciones = fuerza_bruta(palabra1, palabra2, costos, i + 1, j + 1)
         return costo + costos['avanzar'], ["Avanzar ({} == {}) -> {}".format(palabra1[i], palabra2[j], costos['avanzar'])] + acciones
     

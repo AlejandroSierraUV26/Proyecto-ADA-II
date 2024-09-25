@@ -1,39 +1,67 @@
 function startSimulation(algorithm) {
+    console.log(algorithm);
     if (!steps || !steps[algorithm] || steps[algorithm].length === 0) {
         console.error("**No hay acciones disponibles para este algoritmo.**");
         return;
     }
+    console.log(steps[algorithm]);
 
-    // console.log(steps[algorithm]);
-    const actions = steps[algorithm];
-    const container = document.getElementById(`sim-${algorithm}`);
-    const chainContainer = document.getElementById(`chain-${algorithm}`);
-    let currentStep = 0;
+    let acciones = steps[algorithm];
+    console.log('Acciones:');
+    for (let accion of acciones) {
+        console.log(accion);
+        console.log('Tipo:', determinar_accion(accion));
+        console.log('Parametros:', obtener_parametros(accion));
+        console.log('---');
+    }
 
-    // Usar la palabra inicial almacenada
-    let currentWord = Array.from(initialWord); // Cambiado a 'initialWord'
-    let resultWord = Array.from(finalWord);
+    let palabra_vieja = initialWord;
+    let palabra_nueva = finalWord;
+    console.log('Palabra inicial:', palabra_vieja);
+    console.log('Palabra final:', palabra_nueva);
 
-    container.innerHTML = `<div style="text-align: center; font-weight: bold;">${actions[currentStep]}</div>`;
-    chainContainer.innerHTML = `<div style="text-align: center; font-weight: bold;">${formatWord(resultWord)}</div>`; // Muestra la palabra inicial.
+    let delay = 1000;
 
-    const interval = setInterval(() => {
-        // Mostrar el estado actual
-        container.innerHTML = `<div style="text-align: center; font-weight: bold;">${actions[currentStep]}</div>`;
-        chainContainer.innerHTML = `<div style="text-align: center; font-weight: bold;">${formatWord(resultWord)}</div>`; // Muestra la palabra actualizada.
+    // Dependiendo del algoritmo, seleccionamos el div correspondiente
+    let resultadoDiv = document.getElementById(`resultado-${algorithm}`);
 
-        currentStep++; // Mueve esto al final para asegurarte de que se procese la acción actual antes de incrementar
+    // Chequeo para asegurarse de que el div existe
+    if (!resultadoDiv) {
+        console.error(`Div no encontrado: resultado-${algorithm}`);
+        return;
+    }
 
-        if (currentStep >= actions.length) {
-            clearInterval(interval);
-            return;
-        }
-    }, 1000);
+    mostrar_con_delay(palabra_nueva, palabra_vieja, delay, resultadoDiv);
 }
 
-// Procesar cada acción y actualizar la palabra.
+function determinar_accion(accion) {
+    if (accion.includes('Avanzar')) {
+        return 'Avanzar';
+    } else if (accion.includes('Reemplazar')) {
+        return 'Reemplazar';
+    }
+    return 'Insertar';
+}
+function obtener_parametros(accion) {
+    if (accion.includes('==')){
+        const parametros = accion.match(/\(([^)]+)\)/)[1];
+        return parametros.split(' == ');
+    }
+    const parametros = accion.match(/\(([^)]+)\)/)[1];
+    return parametros.split(' -> ');
+    
+}
 
-// Formatear y mostrar la palabra actual como una secuencia.
-function formatWord(wordArray) {
-    return wordArray.join(''); // Muestra la palabra concatenada sin espacios
+
+function mostrar_con_delay(palabra_vieja, palabra_nueva, delay, resultadoDiv) {
+    let maxLength = Math.max(palabra_vieja.length, palabra_nueva.length);
+    resultadoDiv.innerHTML = ''; // Limpiar el contenido previo
+
+    for (let i = 0; i < maxLength; i++) {
+        setTimeout(() => {
+            let parte_vieja = palabra_vieja.slice(0, i + 1);
+            let parte_nueva = palabra_nueva.slice(0, i + 1);
+            resultadoDiv.innerHTML += `Vieja: ${parte_vieja.padEnd(maxLength, ' ')} | Nueva: ${parte_nueva.padEnd(maxLength, ' ')}<br>`;
+        }, i * delay);
+    }
 }
