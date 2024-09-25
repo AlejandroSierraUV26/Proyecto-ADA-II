@@ -44,11 +44,13 @@ def solucion_dinamica(palabra1, palabra2, costos):
                 dp[i][j] = costo_reemplazar
                 acciones[i][j] = accion_reemplazar
     
+    return dp[n][m], acciones
+
+def secuancia_acciones(palabra1, palabra2, costos):
+    n = len(palabra1)
+    m = len(palabra2)
     
-    dp = np.array(dp)
-    # print("Matriz de costos:")
-    # print(dp)
-    
+    _, acciones = solucion_dinamica(palabra1, palabra2, costos)
     
     secuencia_acciones = []
     i, j = n, m
@@ -65,18 +67,7 @@ def solucion_dinamica(palabra1, palabra2, costos):
     
     secuencia_acciones.reverse()
     
-    print("Secuencia de acciones con costos:")
-    for accion in secuencia_acciones:
-        print(accion)
-        
-    
-    return dp[n][m]
+    return secuencia_acciones
 
-def mapeo_costos(costos):
-    return {
-        'avanzar': costos['avanzar'],
-        'borrar': costos['borrar'],
-        'insertar': costos['insertar'],
-        'reemplazar': costos['reemplazar'],
-        'destruir': costos['destruir']
-    }
+
+

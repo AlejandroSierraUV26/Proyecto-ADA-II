@@ -5,9 +5,9 @@ import voraz as vz
 import time
 import numpy as np
 
-# Comparacion de tiempos
-palabra1 = "francesa" 
-palabra2 = "frambuesas"  
+# Comparacion de tiempos 
+palabra1 = "oso" 
+palabra2 = "casa"
 
 costos = {
     'avanzar': 1,
@@ -44,7 +44,7 @@ print()
 
 start_time = time.time()
 
-pd_costo = pd.solucion_dinamica(palabra1, palabra2, costos)
+pd_costo, _ = pd.solucion_dinamica(palabra1, palabra2, costos)
 
 end_time = time.time()
 print("=" * 25)

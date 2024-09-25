@@ -1,4 +1,4 @@
-def solucion_voraz(palabra1, palabra2, costos):
+def solucion_voraz(palabra1, palabra2, costos, acc = 0):
     n = len(palabra1)
     m = len(palabra2)
     i, j = 0, 0
@@ -26,9 +26,11 @@ def solucion_voraz(palabra1, palabra2, costos):
         acciones.append(f"Insertar ( {palabra2[j]} )")
         j += 1
         costo_total += costos['insertar']
+
     
-    print("Secuencia de acciones:")
-    for accion in acciones:
-        print(accion)
-    
+    # print("Secuencia de acciones:")
+    # for accion in acciones:
+    #     print(accion)
+    if acc == 1:
+        return acciones
     return costo_total

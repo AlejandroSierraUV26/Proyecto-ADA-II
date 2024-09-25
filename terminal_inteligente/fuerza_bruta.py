@@ -30,7 +30,12 @@ def fuerza_bruta(palabra1, palabra2, costos, i, j):
 
 def solucion_fuerza_bruta(palabra1, palabra2, costos):
     costo, acciones = fuerza_bruta(palabra1, palabra2, costos, 0, 0)
-    print("Secuencia de acciones:")
-    for accion in acciones:
-        print(accion)
+    # print("Secuencia de acciones:")
+    # for accion in acciones:
+    #     print(accion)
     return costo
+def mapeo_costos(pala1, pala2, costos):
+    costo, acciones = fuerza_bruta(pala1, pala2, costos, 0, 0)
+    return acciones
+
+
