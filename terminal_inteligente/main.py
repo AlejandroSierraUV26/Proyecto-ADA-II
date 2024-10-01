@@ -7,49 +7,38 @@ import numpy as np
 
 # Comparacion de tiempos 
 palabra1 = "oso" 
-palabra2 = "casa" 
+palabra2 = "oso" 
 
 costos = {
     'avanzar': 1,
     'borrar': 2,
     'insertar': 2,
-    'reemplazar': 3,
+    'reemplazar': 1,
     'destruir': 1
 }
 
-print("Comparación de tiempos:")
-print("=" * 25)
-start_time = time.time()
-
-fb_costo = fb.solucion_fuerza_bruta(palabra1, palabra2, costos)
-
-end_time = time.time()
-print("=" * 25)
-
-print(f"Costo de la solución por fuerza bruta: {fb_costo}")
-print(f"Tiempo de ejecución: {end_time - start_time}")
+# Fuerza Bruta
+start = time.time()
+acciones = fb.mapeo_costos(palabra1, palabra2, costos)
+costo = fb.solucion_fuerza_bruta(palabra1, palabra2, costos)
+end = time.time()
+print(f"Costo: {costo}")
+print(f"Acciones: {acciones}")
+print(f"Tiempo: {end - start}")
 print()
-
-
-start_time = time.time()
-print("=" * 25)
-vz_costo = vz.solucion_voraz(palabra1, palabra2, costos)
-
-end_time = time.time()
-print("=" * 25)
+# Programacion Dinamica
+start = time.time()
+costo,acciones = pd.solucion_dinamica(palabra1, palabra2, costos, acc=2)
+end = time.time()
+print(f"Costo: {costo}")
+print(f"Acciones: {acciones}")
+print(f"Tiempo: {end - start}")
 print()
-print(f"Costo de la solución voraz: {vz_costo}")
-print(f"Tiempo de ejecución: {end_time - start_time}")
-print()
+# Voraz
+start = time.time()
+costo, acciones = vz.solucion_voraz(palabra1, palabra2, costos, acc=2)
+end = time.time()
+print(f"Costo: {costo}")
+print(f"Tiempo: {end - start}")
+print(f"Acciones: {acciones}")
 
-start_time = time.time()
-
-pd_costo = pd.solucion_dinamica(palabra1, palabra2, costos)
-
-end_time = time.time()
-print("=" * 25)
-print()
-print(f"Costo de la solución por programación dinámica: {pd_costo}")
-print(f"Tiempo de ejecución: {end_time - start_time}")
-print("=" * 25)
-print()
