@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subastas Públicas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Subastas Públicas</h1>
+        <form method="POST">
+            <label for="acciones">Número de Acciones:</label>
+            <input type="number" id="acciones" name="acciones" required>
+
+            <label for="precio_minimo">Precio Mínimo del Gobierno:</label>
+            <input type="number" id="precio_minimo" name="precio_minimo" required>
+
+            <h3>Ofertas:</h3>
+            <div id="ofertas">
+                <div class="oferta">
+                    <label for="precio_1">Precio:</label>
+                    <input type="number" id="precio_1" name="precio_1" required>
+
+                    <label for="minimo_1">Mínimo:</label>
+                    <input type="number" id="minimo_1" name="minimo_1" required>
+
+                    <label for="maximo_1">Máximo:</label>
+                    <input type="number" id="maximo_1" name="maximo_1" required>
+                </div>
+            </div>
+
+            <button type="button" id="agregar-oferta">Agregar Oferta</button>
+
+            <div class="button-group">
+                <button type="submit">Calcular</button>
+                <button type="button" onclick="window.location.reload()">Reiniciar</button>
+            </div>
+        </form>
+
+        <!-- Mostrar los resultados de los algoritmos -->
+        {% if resultado_pd %}
+        <h2>Resultados:</h2>
+        <p><strong>Programación Dinámica:</strong> {{ resultado_pd }}</p>
+        <p><strong>Fuerza Bruta:</strong> {{ resultado_fb }}</p>
+        <p><strong>Solución Voraz:</strong> {{ resultado_voraz }}</p>
+        {% endif %}
+    </div>
+
+    <script>
+        // Lógica para agregar más ofertas dinámicamente
+        let ofertaCount = 1;
+        document.getElementById('agregar-oferta').addEventListener('click', function() {
+            ofertaCount++;
+            const ofertaDiv = document.createElement('div');
+            ofertaDiv.classList.add('oferta');
+            ofertaDiv.innerHTML = `
+                <label for="precio_${ofertaCount}">Precio:</label>
+                <input type="number" id="precio_${ofertaCount}" name="precio_${ofertaCount}" required>
+
+                <label for="minimo_${ofertaCount}">Mínimo:</label>
+                <input type="number" id="minimo_${ofertaCount}" name="minimo_${ofertaCount}" required>
+
+                <label for="maximo_${ofertaCount}">Máximo:</label>
+                <input type="number" id="maximo_${ofertaCount}" name="maximo_${ofertaCount}" required>
+            `;
+            document.getElementById('ofertas').appendChild(ofertaDiv);
+        });
+    </script>
+</body>
+</html>

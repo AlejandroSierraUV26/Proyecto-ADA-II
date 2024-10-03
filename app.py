@@ -1,10 +1,15 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 from terminal_inteligente import fuerza_bruta as fb, programacion_dinamica as pd, voraz as vz
+from subasta_publica import fuerza_bruta as fb_subasta, programacion_dinamica as pd_subasta, voraz as vz_subasta
 
 app = Flask(__name__)
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['GET'])
 def index():
+    return render_template('index.html')
+
+@app.route('/terminal_inteligente', methods=['GET', 'POST'])
+def terminal_inteligente():
     if request.method == 'POST':
         palabra1 = request.form.get('palabra1')
         palabra2 = request.form.get('palabra2')
@@ -22,13 +27,43 @@ def index():
         resultado_vz, acciones_vz = vz.solucion_voraz(palabra1, palabra2, costos, acc=2)
         resultado_pd, acciones_pd = pd.solucion_dinamica(palabra1, palabra2, costos, acc=2)
 
-        return render_template('index.html', palabra1=palabra1, palabra2=palabra2,
+        return render_template('terminal_inteligente.html', palabra1=palabra1, palabra2=palabra2,
                                costos=costos, resultado_fb=resultado_fb,
                                acciones_fb=acciones_fb, resultado_vz=resultado_vz,
                                acciones_vz=acciones_vz, resultado_pd=resultado_pd,
                                acciones_pd=acciones_pd)
 
-    return render_template('index.html')
+    return render_template('terminal_inteligente.html')
+
+@app.route('/subastas_publicas', methods=['GET', 'POST'])
+def subastas_publicas():
+    if request.method == 'POST':
+        # Capturar los datos del formulario
+        MaxShares = int(request.form['acciones'])
+        GovernmentBuyoutPrice = int(request.form['precio_minimo'])
+        ofertas = []
+
+        # Capturar todas las ofertas
+        i = 1
+        while f'precio_{i}' in request.form:
+            precio = int(request.form[f'precio_{i}'])
+            minimo = int(request.form[f'minimo_{i}'])
+            maximo = int(request.form[f'maximo_{i}'])
+            ofertas.append((precio, minimo, maximo))
+            i += 1
+
+        # Número de ofertas
+        num_offers = len(ofertas)
+
+        # Ejecutar los algoritmos
+        resultado_pd = pd_subasta.programacion_dinamica(MaxShares, GovernmentBuyoutPrice, num_offers, ofertas)
+        resultado_fb, _ = fb_subasta.fuerza_bruta(MaxShares, GovernmentBuyoutPrice, num_offers, ofertas)
+        resultado_voraz = vz_subasta.solucion_voraz(MaxShares, GovernmentBuyoutPrice, num_offers, ofertas)
+
+        # Retornar los resultados a la plantilla HTML
+        return render_template('subastas_publicas.html', resultado_pd=resultado_pd, resultado_fb=resultado_fb, resultado_voraz=resultado_voraz)
+
+    return render_template('subastas_publicas.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
