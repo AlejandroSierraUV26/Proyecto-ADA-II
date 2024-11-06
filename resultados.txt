@@ -1,0 +1,344 @@
+Prueba con palabra1: a, palabra2: c
+D = 1: 0.000059
+F = 1: 0.000060
+V = 1: 0.000016
+Prueba con palabra1: ab, palabra2: ad
+D = 2: 0.000056
+F = 2: 0.000111
+V = 2: 0.000020
+Prueba con palabra1: ab, palabra2: abc
+D = 3: 0.000117
+F = 3: 0.000428
+V = 3: 0.000027
+Prueba con palabra1: abc, palabra2: a
+D = 4: 0.000086
+F = 4: 0.000093
+V = 4: 0.000019
+Prueba con palabra1: abc, palabra2: abd
+D = 5: 0.000133
+F = 5: 0.001184
+V = 5: 0.000028
+Prueba con palabra1: cat, palabra2: bat
+D = 6: 0.000276
+F = 6: 0.000278
+V = 6: 0.000057
+Prueba con palabra1: car, palabra2: bar
+D = 7: 0.000137
+F = 7: 0.000308
+V = 7: 0.000029
+Prueba con palabra1: dog, palabra2: log
+D = 8: 0.000224
+F = 8: 0.000824
+V = 8: 0.000018
+Prueba con palabra1: bag, palabra2: bug
+D = 9: 0.000071
+F = 9: 0.000288
+V = 9: 0.000028
+Prueba con palabra1: ten, palabra2: pen
+D = 10: 0.000092
+F = 10: 0.000281
+V = 10: 0.000018
+Prueba con palabra1: top, palabra2: tip
+D = 11: 0.000335
+F = 11: 0.000451
+V = 11: 0.000021
+Prueba con palabra1: hat, palabra2: bat
+D = 12: 0.000125
+F = 12: 0.000284
+V = 12: 0.000017
+Prueba con palabra1: pit, palabra2: pot
+D = 13: 0.000287
+F = 13: 0.000859
+V = 13: 0.000059
+Prueba con palabra1: son, palabra2: sun
+D = 14: 0.000093
+F = 14: 0.000558
+V = 14: 0.000017
+Prueba con palabra1: ape, palabra2: map
+D = 15: 0.000128
+F = 15: 0.000784
+V = 15: 0.000018
+Prueba con palabra1: bat, palabra2: bot
+D = 16: 0.000195
+F = 16: 0.000960
+V = 16: 0.000019
+Prueba con palabra1: bar, palabra2: far
+D = 17: 0.000122
+F = 17: 0.000669
+V = 17: 0.000017
+Prueba con palabra1: red, palabra2: reed
+D = 18: 0.000112
+F = 18: 0.001714
+V = 18: 0.000035
+Prueba con palabra1: fit, palabra2: sit
+D = 19: 0.000132
+F = 19: 0.000654
+V = 19: 0.000016
+Prueba con palabra1: fan, palabra2: tan
+D = 20: 0.000072
+F = 20: 0.000657
+V = 20: 0.000028
+Prueba con palabra1: apple, palabra2: aple
+D = 21: 0.000245
+F = 21: 0.007723
+V = 21: 0.000021
+Prueba con palabra1: axe, palabra2: axes
+D = 22: 0.000171
+F = 22: 0.001077
+V = 22: 0.000019
+Prueba con palabra1: boat, palabra2: coat
+D = 23: 0.000150
+F = 23: 0.003511
+V = 23: 0.000031
+Prueba con palabra1: play, palabra2: stay
+D = 24: 0.000192
+F = 24: 0.003583
+V = 24: 0.000021
+Prueba con palabra1: goal, palabra2: gale
+D = 25: 0.000322
+F = 25: 0.004121
+V = 25: 0.000030
+Prueba con palabra1: part, palabra2: park
+D = 26: 0.000096
+F = 26: 0.001607
+V = 26: 0.000027
+Prueba con palabra1: game, palabra2: fame
+D = 27: 0.000168
+F = 27: 0.002384
+V = 27: 0.000019
+Prueba con palabra1: home, palabra2: come
+D = 28: 0.000179
+F = 28: 0.001719
+V = 28: 0.000019
+Prueba con palabra1: house, palabra2: mouse
+D = 29: 0.000270
+F = 29: 0.021986
+V = 29: 0.000019
+Prueba con palabra1: hike, palabra2: like
+D = 30: 0.000101
+F = 30: 0.002012
+V = 30: 0.000018
+Prueba con palabra1: bake, palabra2: cake
+D = 31: 0.000197
+F = 31: 0.003598
+V = 31: 0.000018
+Prueba con palabra1: test, palabra2: tests
+D = 32: 0.000239
+F = 32: 0.008433
+V = 32: 0.000037
+Prueba con palabra1: hello, palabra2: hell
+D = 33: 0.000105
+F = 33: 0.004807
+V = 33: 0.000034
+Prueba con palabra1: task, palabra2: mask
+D = 34: 0.000206
+F = 34: 0.003366
+V = 34: 0.000020
+Prueba con palabra1: peak, palabra2: beak
+D = 35: 0.000134
+F = 35: 0.003642
+V = 35: 0.000019
+Prueba con palabra1: play, palabra2: pray
+D = 36: 0.000148
+F = 36: 0.001732
+V = 36: 0.000018
+Prueba con palabra1: hope, palabra2: cope
+D = 37: 0.000198
+F = 37: 0.003094
+V = 37: 0.000027
+Prueba con palabra1: wide, palabra2: side
+D = 38: 0.000093
+F = 38: 0.001672
+V = 38: 0.000020
+Prueba con palabra1: mark, palabra2: dark
+D = 39: 0.000095
+F = 39: 0.002765
+V = 39: 0.000018
+Prueba con palabra1: tree, palabra2: free
+D = 40: 0.000259
+F = 40: 0.002340
+V = 40: 0.000031
+Prueba con palabra1: bear, palabra2: dear
+D = 41: 0.000093
+F = 41: 0.003423
+V = 41: 0.000035
+Prueba con palabra1: side, palabra2: slide
+D = 42: 0.000263
+F = 42: 0.005766
+V = 42: 0.000031
+Prueba con palabra1: right, palabra2: light
+D = 43: 0.000314
+F = 43: 0.010030
+V = 43: 0.000084
+Prueba con palabra1: peace, palabra2: place
+D = 44: 0.000287
+F = 44: 0.010348
+V = 44: 0.000037
+Prueba con palabra1: close, palabra2: closes
+D = 45: 0.000138
+F = 45: 0.039931
+V = 45: 0.000034
+Prueba con palabra1: stone, palabra2: clone
+D = 46: 0.000143
+F = 46: 0.018927
+V = 46: 0.000024
+Prueba con palabra1: flame, palabra2: frame
+D = 47: 0.000135
+F = 47: 0.018458
+V = 47: 0.000020
+Prueba con palabra1: drone, palabra2: phone
+D = 48: 0.000280
+F = 48: 0.010643
+V = 48: 0.000025
+Prueba con palabra1: crawl, palabra2: drawl
+D = 49: 0.000122
+F = 49: 0.015726
+V = 49: 0.000019
+Prueba con palabra1: least, palabra2: beast
+D = 50: 0.000293
+F = 50: 0.016484
+V = 50: 0.000032
+Prueba con palabra1: shell, palabra2: spell
+D = 51: 0.000346
+F = 51: 0.012494
+V = 51: 0.000025
+Prueba con palabra1: shine, palabra2: shine
+D = 52: 0.000278
+F = 52: 0.018891
+V = 52: 0.000019
+Prueba con palabra1: order, palabra2: border
+D = 53: 0.000130
+F = 53: 0.040011
+V = 53: 0.000026
+Prueba con palabra1: actor, palabra2: factors
+D = 54: 0.000175
+F = 54: 0.060233
+V = 54: 0.000042
+Prueba con palabra1: saving, palabra2: savings
+D = 55: 0.000238
+F = 55: 0.280369
+V = 55: 0.000019
+Prueba con palabra1: coding, palabra2: cording
+D = 56: 0.000137
+F = 56: 0.201953
+V = 56: 0.000030
+Prueba con palabra1: begin, palabra2: begins
+D = 57: 0.000434
+F = 57: 0.044564
+V = 57: 0.000029
+Prueba con palabra1: coding, palabra2: codings
+D = 58: 0.000260
+F = 58: 0.249569
+V = 58: 0.000048
+Prueba con palabra1: house, palabra2: houses
+D = 59: 0.000205
+F = 59: 0.041637
+V = 59: 0.000026
+Prueba con palabra1: cloud, palabra2: cloudy
+D = 60: 0.000362
+F = 60: 0.031274
+V = 60: 0.000024
+Prueba con palabra1: robots, palabra2: robotic
+D = 61: 0.000518
+F = 61: 0.187877
+V = 61: 0.000093
+Prueba con palabra1: leader, palabra2: leavers
+D = 62: 0.000199
+F = 62: 0.156402
+V = 62: 0.000049
+Prueba con palabra1: better, palabra2: betters
+D = 63: 0.000193
+F = 63: 0.183524
+V = 63: 0.000017
+Prueba con palabra1: school, palabra2: schools
+D = 64: 0.000432
+F = 64: 0.196937
+V = 64: 0.000023
+Prueba con palabra1: better, palabra2: letters
+D = 65: 0.000277
+F = 65: 0.147044
+V = 65: 0.000022
+Prueba con palabra1: change, palabra2: changed
+D = 66: 0.000167
+F = 66: 0.167925
+V = 66: 0.000022
+Prueba con palabra1: pencil, palabra2: pencils
+D = 67: 0.000163
+F = 67: 0.171687
+V = 67: 0.000028
+Prueba con palabra1: strive, palabra2: strives
+D = 68: 0.000191
+F = 68: 0.167803
+V = 68: 0.000038
+Prueba con palabra1: powers, palabra2: flowers
+D = 69: 0.000194
+F = 69: 0.151756
+V = 69: 0.000030
+Prueba con palabra1: machine, palabra2: machines
+D = 70: 0.000246
+F = 70: 0.959424
+V = 70: 0.000029
+Prueba con palabra1: builder, palabra2: builders
+D = 71: 0.000293
+F = 71: 1.164861
+V = 71: 0.000031
+Prueba con palabra1: planner, palabra2: planners
+D = 72: 0.000256
+F = 72: 1.073044
+V = 72: 0.000024
+Prueba con palabra1: writing, palabra2: writers
+D = 73: 0.000231
+F = 73: 0.354941
+V = 73: 0.000025
+Prueba con palabra1: dreamer, palabra2: dreamers
+D = 74: 0.000192
+F = 74: 0.882079
+V = 74: 0.000027
+Prueba con palabra1: dancing, palabra2: dancers
+D = 75: 0.000151
+F = 75: 0.351223
+V = 75: 0.000019
+Prueba con palabra1: smarter, palabra2: smarters
+D = 76: 0.000503
+F = 76: 1.207534
+V = 76: 0.000140
+Prueba con palabra1: dancers, palabra2: dancing
+D = 77: 0.000744
+F = 77: 0.504597
+V = 77: 0.000026
+Prueba con palabra1: testing, palabra2: nesting
+D = 78: 0.000233
+F = 78: 0.380644
+V = 78: 0.000056
+Prueba con palabra1: writing, palabra2: written
+D = 79: 0.000214
+F = 79: 0.420300
+V = 79: 0.000022
+Prueba con palabra1: builder, palabra2: building
+D = 80: 0.000229
+F = 80: 0.884551
+V = 80: 0.000025
+Prueba con palabra1: speaker, palabra2: speakers
+D = 81: 0.000363
+F = 81: 0.952531
+V = 81: 0.000024
+Prueba con palabra1: creating, palabra2: creators
+D = 82: 0.000374
+F = 82: 2.152206
+V = 82: 0.000026
+Prueba con palabra1: machine, palabra2: machiner
+D = 83: 0.000238
+F = 83: 0.948002
+V = 83: 0.000024
+Prueba con palabra1: planning, palabra2: planners
+D = 84: 0.000389
+F = 84: 3.299722
+V = 84: 0.000042
+Prueba con palabra1: meeting, palabra2: meetings
+D = 85: 0.000585
+F = 85: 1.078806
+V = 85: 0.000023
+Prueba con palabra1: testing, palabra2: tested
+D = 86: 0.000221
+F = 86: 0.146540
+V = 86: 0.000023

@@ -3,6 +3,5 @@ Terminal Inteligente:
     - Implementar la opcion Kill para eliminar los caracteres de la cadena de la derecha.
 
     
-Subasta :
-    - Interfaz de usuario
+
     
