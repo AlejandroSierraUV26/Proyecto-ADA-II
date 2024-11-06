@@ -1,6 +1,6 @@
 import itertools
 
-def fuerza_bruta(MaxShares, GovernmentBuyoutPrice, num_offers, bidding_offers):
+def fuerza_bruta(MaxShares, GovernmentBuyoutPrice, num_offers, bidding_offers, acc = 0):
     # Crear un rango de acciones posibles que se pueden comprar en cada oferta
     acciones_posibles = [
         range(bidding_offers[i][1], bidding_offers[i][2] + 1)
@@ -25,4 +25,6 @@ def fuerza_bruta(MaxShares, GovernmentBuyoutPrice, num_offers, bidding_offers):
                 max_valor = total_valor
                 mejor_opcion = combinacion
 
+    if acc != 0:
+        return max_valor
     return max_valor, mejor_opcion
