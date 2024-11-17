@@ -4,50 +4,73 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Subastas Públicas</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles_subasta.css') }}">
 </head>
 <body>
     <div class="container">
-        <h1>Subastas Públicas</h1>
-        <form method="POST">
-            <label for="acciones">Número de Acciones:</label>
-            <input type="number" id="acciones" name="acciones" required>
+        <h1 class="titulo">Sub astas Públicas</h1>
+        <button id="openModal" class="boton_iniciar">Iniciar Consulta</button>
 
-            <label for="precio_minimo">Precio Mínimo del Gobierno:</label>
-            <input type="number" id="precio_minimo" name="precio_minimo" required>
+        <div id="result">
+            <h2>Resultados:</h2>
+            <p id="resultado_pd"></p>
+            <p id="resultado_fb"></p>
+            <p id="resultado_voraz"></p>
+            <button onclick="reiniciarConsulta()">Iniciar Nueva Consulta</button>
+        </div>
 
-            <h3>Ofertas:</h3>
-            <div id="ofertas">
-                <div class="oferta">
-                    <label for="precio_1">Precio:</label>
-                    <input type="number" id="precio_1" name="precio_1" required>
+        <!-- Modal -->
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Ingrese los Datos</h2>
+                <label for="acciones">Número de Acciones:</label>
+                <input type="number" id="acciones" required>
 
-                    <label for="minimo_1">Mínimo:</label>
-                    <input type="number" id="minimo_1" name="minimo_1" required>
+                <label for="precio_minimo">Precio Mínimo del Gobierno:</label>
+                <input type="number" id="precio_minimo" required>
+                
+                <h3>Ofertas:</h3>
+                <div id="ofertas">
+                    <div class="oferta">
+                        <label for="precio_1">Precio:</label>
+                        <input type="number" id="precio_1" required>
 
-                    <label for="maximo_1">Máximo:</label>
-                    <input type="number" id="maximo_1" name="maximo_1" required>
+                        <label for="minimo_1">Mínimo:</label>
+                        <input type="number" id="minimo_1" required>
+
+                        <label for="maximo_1">Máximo:</label>
+                        <input type="number" id="maximo_1" required>
+                    </div>
                 </div>
+
+                <button type="button" id="agregar-oferta">Agregar Oferta</button>
+                <button type="button" id="calcular">Calcular</button>
             </div>
-
-            <button type="button" id="agregar-oferta">Agregar Oferta</button>
-
-            <div class="button-group">
-                <button type="submit">Calcular</button>
-                <button type="button" onclick="window.location.reload()">Reiniciar</button>
-            </div>
-        </form>
-
-        <!-- Mostrar los resultados de los algoritmos -->
-        {% if resultado_pd %}
-        <h2>Resultados:</h2>
-        <p><strong>Programación Dinámica:</strong> {{ resultado_pd }}</p>
-        <p><strong>Fuerza Bruta:</strong> {{ resultado_fb }}</p>
-        <p><strong>Solución Voraz:</strong> {{ resultado_voraz }}</p>
-        {% endif %}
+        </div>
     </div>
 
     <script>
+        // Lógica para abrir y cerrar el modal
+        const modal = document.getElementById("myModal");
+        const btn = document.getElementById("openModal");
+        const span = document.getElementsByClassName("close")[0];
+
+        btn.onclick = function() {
+            modal.style.display = "block";
+            //document.querySelector('.titulo').style.display = "block";
+        }
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
         // Lógica para agregar más ofertas dinámicamente
         let ofertaCount = 1;
         document.getElementById('agregar-oferta').addEventListener('click', function() {
@@ -56,16 +79,48 @@
             ofertaDiv.classList.add('oferta');
             ofertaDiv.innerHTML = `
                 <label for="precio_${ofertaCount}">Precio:</label>
-                <input type="number" id="precio_${ofertaCount}" name="precio_${ofertaCount}" required>
+                <input type="number" id="precio_${ofertaCount}" required>
 
                 <label for="minimo_${ofertaCount}">Mínimo:</label>
-                <input type="number" id="minimo_${ofertaCount}" name="minimo_${ofertaCount}" required>
+                <input type="number" id="minimo_${ofertaCount}" required>
 
                 <label for="maximo_${ofertaCount}">Máximo:</label>
-                <input type="number" id="maximo_${ofertaCount}" name="maximo_${ofertaCount}" required>
+                <input type="number" id="maximo_${ofertaCount}" required>
             `;
             document.getElementById('ofertas').appendChild(ofertaDiv);
         });
+
+        // Lógica para calcular y mostrar resultados
+        document.getElementById('calcular').addEventListener('click', function() {
+            const acciones = document.getElementById('acciones').value;
+            const precioMinimo = document.getElementById('precio_minimo').value;
+            // Aquí puedes agregar la lógica para calcular los resultados
+            // Simulación de resultados
+            document.getElementById('resultado_pd').innerText = `Resultados de Programación Dinámica para ${acciones} acciones y precio mínimo ${precioMinimo}`;
+            document.getElementById('resultado_fb').innerText = `Resultados de Fuerza Bruta para ${acciones} acciones y precio mínimo ${precioMinimo}`;
+            document.getElementById('resultado_voraz').innerText = `Resultados de Solución Voraz para ${acciones} acciones y precio mínimo ${precioMinimo}`;
+            document.getElementById('result').style.display = 'block';
+            modal.style.display = 'none';
+        });
+
+        function reiniciarConsulta() {
+            document.getElementById('result').style.display = 'none';
+            document.getElementById('acciones').value = '';
+            document.getElementById('precio_minimo').value = '';
+            document.getElementById('ofertas').innerHTML = `
+                <div class="oferta">
+                    <label for="precio_1">Precio:</label>
+                    <input type="number" id="precio_1" required>
+
+                    <label for="minimo_1">Mínimo:</label>
+                    <input type="number" id="minimo_1" required>
+
+                    <label for="maximo_1">Máximo:</label>
+                    <input type="number" id="maximo_1" required>
+                </div>
+            `;
+            ofertaCount = 1;
+        }
     </script>
 </body>
 </html>

@@ -3,82 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terminal Inteligente</title>
+    <title>Comparación de Algoritmos</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
     <div class="container">
-        <h1>Comparación de Algoritmos de Edición de Palabras</h1>
-        <form method="POST">
-            <!-- Formulario de entrada -->
-            <label for="palabra1">Palabra Inicial:</label>
-            <input type="text" id="palabra1" name="palabra1" required>
+        <h1>Comparación de Algoritmos de Edición</h1>
+        <button id="openModal" class="boton_iniciar">Configurar y Comparar</button>
 
-            <label for="palabra2">Palabra Final:</label>
-            <input type="text" id="palabra2" name="palabra2" required>
-
-            <h3>Defina los Costos:</h3>
-            <label for="costo_avanzar">Costo de Avanzar:</label>
-            <input type="number" id="costo_avanzar" name="costo_avanzar" value="1">
-
-            <label for="costo_borrar">Costo de Borrar:</label>
-            <input type="number" id="costo_borrar" name="costo_borrar" value="2">
-
-            <label for="costo_insertar">Costo de Insertar:</label>
-            <input type="number" id="costo_insertar" name="costo_insertar" value="2">
-
-            <label for="costo_reemplazar">Costo de Reemplazar:</label>
-            <input type="number" id="costo_reemplazar" name="costo_reemplazar" value="3">
-
-            <label for="costo_destruir">Costo de Destruir:</label>
-            <input type="number" id="costo_destruir" name="costo_destruir" value="1">
-
-            <div class="button-group">
-                <button type="submit">Calcular</button>
-                <button type="button" onclick="window.location.reload()">Reiniciar</button>
-            </div>
-        </form>
-
-        {% if palabra1 and palabra2 %}
-        <script>
-            // Pasar las palabras inicial y final desde Jinja a JavaScript
-            const initialWord = "{{ palabra1 }}";
-            const finalWord = "{{ palabra2 }}";
-
-            // Pasar los datos de acciones de los algoritmos desde Jinja a JavaScript
-            const steps = {
-                fb: {{ acciones_fb | tojson | safe }},
-                vz: {{ acciones_vz | tojson | safe }},
-                pd: {{ acciones_pd | tojson | safe }}
-            };
-        </script>
-
-        <h2>Resultados:</h2>
-        <div class="results">
+        <div id="result" style="display: none;">
+            <h2>Resultados:</h2>
             <div class="result-column">
                 <h3>Fuerza Bruta</h3>
-                <p>Costo: {{ resultado_fb }}</p>
-                <button onclick="startSimulation('fb')">Simular</button>    
-                <div id="resultado-fb" class="resultado"></div> <!-- Contenedor para el resultado de la simulación -->
+                <p>Costo: <span id="resultado_fb">{{ resultado_fb }}</span></p>
+                <button onclick="startSimulation('fb')">Simular</button>
+                <div id="resultado-fb" class="resultado"></div>
             </div>
-            
             <div class="result-column">
                 <h3>Voraz</h3>
-                <p>Costo: {{ resultado_vz }}</p>
+                <p>Costo: <span id="resultado_vz">{{ resultado_vz }}</span></p>
                 <button onclick="startSimulation('vz')">Simular</button>
-                <div id="resultado-vz" class="resultado"></div> <!-- Contenedor para el resultado de la simulación -->
+                <div id="resultado-vz" class="resultado"></div>
             </div>
-            
             <div class="result-column">
                 <h3>Programación Dinámica</h3>
-                <p>Costo: {{ resultado_pd }}</p>
+                <p>Costo: <span id="resultado_pd">{{ resultado_pd }}</span></p>
                 <button onclick="startSimulation('pd')">Simular</button>
-                <div id="resultado-pd" class="resultado"></div> <!-- Contenedor para el resultado de la simulación -->
-            </div>                
+                <div id="resultado-pd" class="resultado"></div>
+            </div>
+            <button onclick="reiniciarConsulta()", class="bton_reinicar">Reiniciar</button>
         </div>
-        {% endif %}
+
+        <!-- Modal para configuración -->
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Configurar Costos y Palabras</h2>
+                <form id="config-form" method="POST">
+                    <label for="palabra1">Palabra Inicial:</label>
+                    <input type="text" id="palabra1" name="palabra1" placeholder="Ingrese la palabra inicial" required>
+                    
+                    <label for="palabra2">Palabra Final:</label>
+                    <input type="text" id="palabra2" name="palabra2" placeholder="Ingrese la palabra final" required>
+        
+                    <h3>Defina los Costos:</h3>
+                    <label for="costo_avanzar">Costo de Avanzar:</label>
+                    <input type="number" id="costo_avanzar" name="costo_avanzar" value="1" min="0">
+        
+                    <label for="costo_borrar">Costo de Borrar:</label>
+                    <input type="number" id="costo_borrar" name="costo_borrar" value="2" min="0">
+        
+                    <label for="costo_insertar">Costo de Insertar:</label>
+                    <input type="number" id="costo_insertar" name="costo_insertar" value="2" min="0">
+        
+                    <label for="costo_reemplazar">Costo de Reemplazar:</label>
+                    <input type="number" id="costo_reemplazar" name="costo_reemplazar" value="3" min="0">
+        
+                    <label for="costo_destruir">Costo de Destruir:</label>
+                    <input type="number" id="costo_destruir" name="costo_destruir" value="1" min="0">
+        
+                    <div class="button-group">
+                        <button type="submit">Calcular</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
     </div>
 
-    <script src="{{ url_for('static', filename='js/simulation.js') }}"></script>
+    <script>
+        // Lógica para abrir y cerrar el modal
+        const modal = document.getElementById("myModal");
+        const btn = document.getElementById("openModal");
+        const span = document.getElementsByClassName("close")[0];
+
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        // Lógica para calcular y mostrar resultados
+        document.getElementById('config-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const palabra1 = document.getElementById('palabra1').value;
+            const palabra2 = document.getElementById('palabra2').value;
+            const costoAvanzar = document.getElementById('costo_avanzar').value;
+            const costoBorrar = document.getElementById('costo_borrar').value;
+            const costoInsertar = document.getElementById('costo_insertar').value;
+            const costoReemplazar = document.getElementById('costo_reemplazar').value;
+            const costoDestruir = document.getElementById('costo_destruir').value;
+
+            // Aquí puedes agregar la lógica para calcular los resultados
+            // Simulación de resultados
+            document.getElementById('resultado_fb').innerText = `Resultados de Fuerza Bruta para transformar ${palabra1} en ${palabra2}`;
+            document.getElementById('resultado_vz').innerText = `Resultados de Voraz para transformar ${palabra1} en ${palabra2}`;
+            document.getElementById('resultado_pd').innerText = `Resultados de Programación Dinámica para transformar ${palabra1} en ${palabra2}`;
+            document.getElementById('result').style.display = 'block';
+            modal.style.display = 'none';
+        });
+
+        function reiniciarConsulta() {
+            document.getElementById('result').style.display = 'none';
+            document.getElementById('palabra1').value = '';
+            document.getElementById('palabra2').value = '';
+            document.getElementById('costo_avanzar').value = '1';
+            document.getElementById('costo_borrar').value = '2';
+            document.getElementById('costo_insertar').value = '2';
+            document.getElementById('costo_reemplazar').value = '3';
+            document.getElementById('costo_destruir').value = '1';
+        }
+    </script>
+    
 </body>
 </html>

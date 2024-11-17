@@ -1,7 +1,0 @@
-Terminal Inteligente: 
-    - Mejora interfaz, que se logre ver la construcción de la cadena de texto.
-    - Implementar la opcion Kill para eliminar los caracteres de la cadena de la derecha.
-
-    
-
-    
