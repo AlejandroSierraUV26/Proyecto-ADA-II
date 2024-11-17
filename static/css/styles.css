@@ -132,3 +132,46 @@ button:hover {
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
     padding: 15px 30px;
 }
+.grafico {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.grafico span {
+    display: inline-block;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    background-color: #f4f4f4;
+    border-radius: 3px;
+    font-size: 14px;
+    font-family: monospace;
+    transition: background-color 0.3s ease;
+}
+
+.grafico span.active {
+    background-color: #4caf50;
+    color: white;
+}
+.resultados{
+    display: none;
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f4f4f4;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+
+}
+.result-column{
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding: 10px;
+    border : 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f4f4f4;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+
+    
+}

@@ -11,27 +11,33 @@
         <h1>Comparación de Algoritmos de Edición</h1>
         <button id="openModal" class="boton_iniciar">Configurar y Comparar</button>
 
-        <div id="result" style="display: none;">
+        <div id="result", class="resultados">
             <h2>Resultados:</h2>
             <div class="result-column">
                 <h3>Fuerza Bruta</h3>
                 <p>Costo: <span id="resultado_fb">{{ resultado_fb }}</span></p>
-                <button onclick="startSimulation('fb')">Simular</button>
+                <p>Acciones a realizar</p>
+                <p><span id="resultado_fb">{{ acciones_fb }}</span></p>
                 <div id="resultado-fb" class="resultado"></div>
+                <div id="acciones-fb" class="acciones"></div>
             </div>
             <div class="result-column">
                 <h3>Voraz</h3>
                 <p>Costo: <span id="resultado_vz">{{ resultado_vz }}</span></p>
-                <button onclick="startSimulation('vz')">Simular</button>
+                <p>Acciones a realizar</p>
+                <p><span id="resultado_vz">{{ acciones_vz }}</span></p>
                 <div id="resultado-vz" class="resultado"></div>
+                <div id="acciones-vz" class="acciones"></div>
             </div>
             <div class="result-column">
                 <h3>Programación Dinámica</h3>
                 <p>Costo: <span id="resultado_pd">{{ resultado_pd }}</span></p>
-                <button onclick="startSimulation('pd')">Simular</button>
+                <p>Acciones a realizar</p>
+                <p><span id="resultado_pd">{{ acciones_pd }}</span></p>
                 <div id="resultado-pd" class="resultado"></div>
+                <div id="acciones-pd" class="acciones"></div>
             </div>
-            <button onclick="reiniciarConsulta()", class="bton_reinicar">Reiniciar</button>
+            <button onclick="reiniciarConsulta()" class="bton_reinicar">Reiniciar</button>
         </div>
 
         <!-- Modal para configuración -->
@@ -104,9 +110,6 @@
 
             // Aquí puedes agregar la lógica para calcular los resultados
             // Simulación de resultados
-            document.getElementById('resultado_fb').innerText = `Resultados de Fuerza Bruta para transformar ${palabra1} en ${palabra2}`;
-            document.getElementById('resultado_vz').innerText = `Resultados de Voraz para transformar ${palabra1} en ${palabra2}`;
-            document.getElementById('resultado_pd').innerText = `Resultados de Programación Dinámica para transformar ${palabra1} en ${palabra2}`;
             document.getElementById('result').style.display = 'block';
             modal.style.display = 'none';
         });
@@ -121,6 +124,8 @@
             document.getElementById('costo_reemplazar').value = '3';
             document.getElementById('costo_destruir').value = '1';
         }
+
+
     </script>
     
 </body>
