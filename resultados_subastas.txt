@@ -38,11 +38,7 @@ Prueba 10 con MaxShares: 28, GovernmentBuyoutPrice: 7, num_offers: 6, bidding_of
 D = 10: 0.000335
 F = x10: 0.068881
 V = 10: 0.000016
-Prueba 11 con MaxShares: 30, GovernmentBuyoutPrice: 10, num_offers: 8, bidding_offers: [(10, 2, 12), (9, 3, 11), (8, 1, 10), (7, 4, 9), (6, 2, 8), (5, 1, 7), (4, 3, 6), (3, 2, 5)]
-D = 11: 0.000537
-F = x11: 1.207253
-V = 11: 0.000014
-Prueba 12 con MaxShares: 45, GovernmentBuyoutPrice: 9, num_offers: 8, bidding_offers: [(9, 1, 12), (8, 2, 11), (7, 3, 10), (6, 4, 9), (5, 2, 8), (4, 1, 7), (3, 3, 6), (2, 1, 5)]
+Prueba 11 con MaxShares: 45, GovernmentBuyoutPrice: 9, num_offers: 8, bidding_offers: [(9, 1, 12), (8, 2, 11), (7, 3, 10), (6, 4, 9), (5, 2, 8), (4, 1, 7), (3, 3, 6), (2, 1, 5)]
 D = 12: 0.001009
 F = x12: 2.401836
 V = 12: 0.000016

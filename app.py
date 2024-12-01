@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, jsonify
 from terminal_inteligente import fuerza_bruta as fb, programacion_dinamica as pd, voraz as vz
 from subasta_publica import fuerza_bruta as fb_subasta, programacion_dinamica as pd_subasta, voraz as vz_subasta
 
@@ -38,12 +38,10 @@ def terminal_inteligente():
 @app.route('/subastas_publicas', methods=['GET', 'POST'])
 def subastas_publicas():
     if request.method == 'POST':
-        # Capturar los datos del formulario
         MaxShares = int(request.form['acciones'])
         GovernmentBuyoutPrice = int(request.form['precio_minimo'])
         ofertas = []
 
-        # Capturar todas las ofertas
         i = 1
         while f'precio_{i}' in request.form:
             precio = int(request.form[f'precio_{i}'])
@@ -52,18 +50,21 @@ def subastas_publicas():
             ofertas.append((precio, minimo, maximo))
             i += 1
 
-        # Número de ofertas
         num_offers = len(ofertas)
 
-        # Ejecutar los algoritmos
-        resultado_pd = pd_subasta.programacion_dinamica(MaxShares, GovernmentBuyoutPrice, num_offers, ofertas)
-        resultado_fb, _ = fb_subasta.fuerza_bruta(MaxShares, GovernmentBuyoutPrice, num_offers, ofertas)
-        resultado_voraz = vz_subasta.solucion_voraz(MaxShares, GovernmentBuyoutPrice, num_offers, ofertas)
+        resultado_pd, mejor_pd = pd_subasta.programacion_dinamica(MaxShares, GovernmentBuyoutPrice, num_offers, ofertas)
+        resultado_fb, mejor_fb = fb_subasta.fuerza_bruta(MaxShares, GovernmentBuyoutPrice, num_offers, ofertas)
+        resultado_voraz, mejor_vz = vz_subasta.solucion_voraz(MaxShares, GovernmentBuyoutPrice, num_offers, ofertas, 1)
 
-        # Retornar los resultados a la plantilla HTML
-        return render_template('subastas_publicas.html', resultado_pd=resultado_pd, resultado_fb=resultado_fb, resultado_voraz=resultado_voraz)
+        return jsonify({
+            'resultado_pd': resultado_pd,
+            'mejor_pd': mejor_pd,
+            'resultado_fb': resultado_fb,
+            'mejor_fb': mejor_fb,
+            'resultado_voraz': resultado_voraz,
+            'mejor_vz': mejor_vz
+        })
 
     return render_template('subastas_publicas.html')
-
 if __name__ == '__main__':
     app.run(debug=True)

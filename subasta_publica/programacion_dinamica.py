@@ -44,6 +44,7 @@ def programacion_dinamica(MaxShares, GovernmentBuyoutPrice, num_offers, bidding_
             max_valor = total_valor
 
             mejor_opcion = decisiones[num_offers][x]  # Guardar la mejor combinación de ofertas    # Mostrar la mejor opción
+            # [(oferta, cantidad)]
     # dp = filtar_dp(dp)
     # print("Tabla DP: \n")
     # dp = np.array(dp)
@@ -56,7 +57,7 @@ def programacion_dinamica(MaxShares, GovernmentBuyoutPrice, num_offers, bidding_
         #     print(f"Oferta {oferta + 1}: Comprar {cantidad} acciones \nPrecio: ${f'{(bidding_offers[oferta][0] * cantidad):,}'.replace(",",".")}\n")    
         
     
-        return max_valor
+        return max_valor, mejor_opcion
 def filtar_dp(dp):
     for i in range(len(dp)):
         for j in range(len(dp[i])):

@@ -1,4 +1,4 @@
-def solucion_voraz(MaxShares, GovernmentBuyoutPrice, num_offers, bidding_offers):
+def solucion_voraz(MaxShares, GovernmentBuyoutPrice, num_offers, bidding_offers, acc=0):
     # Ordenar ofertas por precio por acción en orden descendente
     ofertas_ordenadas = sorted(bidding_offers, key=lambda x: x[0], reverse=True)
     
@@ -29,9 +29,11 @@ def solucion_voraz(MaxShares, GovernmentBuyoutPrice, num_offers, bidding_offers)
     total_valor += valor_gobierno
 
     # Mostrar la mejor opción
-    # print("Mejor opción (ofertas):")
+
     # for oferta, cantidad in mejor_opcion:
     #     print(f"Oferta {oferta}: Comprar {cantidad} acciones \nPrecio: ${f'{cantidad * bidding_offers[oferta - 1][0]:,}'.replace(',', '.')}\n")
-    
-    return total_valor
+    if acc == 0:
+        return total_valor
+    else:
+        return total_valor, mejor_opcion
 

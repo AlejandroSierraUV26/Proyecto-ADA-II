@@ -8,44 +8,52 @@
 </head>
 <body>
     <div class="container">
-        <h1 class="titulo">Sub astas Públicas</h1>
+        <h1 class="titulo">Subastas Públicas</h1>
         <button id="openModal" class="boton_iniciar">Iniciar Consulta</button>
 
         <div id="result">
             <h2>Resultados:</h2>
-            <p id="resultado_pd"></p>
-            <p id="resultado_fb"></p>
-            <p id="resultado_voraz"></p>
+            <h3>Programación Dinámica</h3>
+            <p>Costo: <span id="resultado_pd">{{ resultado_pd }}</span></p>
+            <p>Mejor: <span id="mejor_pd">{{ mejor_pd }}</span></p>
+            <h3>Fuerza Bruta</h3>
+            <p>Costo: <span id="resultado_fb">{{ resultado_fb }}</span></p>
+            <p>Mejor: <span id="mejor_fb">{{ mejor_fb }}</span></p>
+            <h3>Voraz</h3>
+            <p>Costo: <span id="resultado_voraz">{{ resultado_voraz }}</span></p>
+            <p>Mejor: <span id="mejor_vz">{{ mejor_vz }}</span></p>
             <button onclick="reiniciarConsulta()">Iniciar Nueva Consulta</button>
         </div>
+        
 
         <!-- Modal -->
         <div id="myModal" class="modal">
             <div class="modal-content">
                 <span class="close">&times;</span>
-                <h2>Ingrese los Datos</h2>
-                <label for="acciones">Número de Acciones:</label>
-                <input type="number" id="acciones" required>
-
-                <label for="precio_minimo">Precio Mínimo del Gobierno:</label>
-                <input type="number" id="precio_minimo" required>
+                <form id="subastaForm" method="POST" action="/subastas_publicas">
+                    <label for="acciones">Número de Acciones:</label>
+                    <input type="number" id="acciones" name="acciones" required>
                 
-                <h3>Ofertas:</h3>
-                <div id="ofertas">
-                    <div class="oferta">
-                        <label for="precio_1">Precio:</label>
-                        <input type="number" id="precio_1" required>
-
-                        <label for="minimo_1">Mínimo:</label>
-                        <input type="number" id="minimo_1" required>
-
-                        <label for="maximo_1">Máximo:</label>
-                        <input type="number" id="maximo_1" required>
+                    <label for="precio_minimo">Precio Mínimo del Gobierno:</label>
+                    <input type="number" id="precio_minimo" name="precio_minimo" required>
+                    
+                    <h3>Ofertas:</h3>
+                    <div id="ofertas">
+                        <div class="oferta">
+                            <label for="precio_1">Precio:</label>
+                            <input type="number" id="precio_1" name="precio_1" required>
+                
+                            <label for="minimo_1">Mínimo:</label>
+                            <input type="number" id="minimo_1" name="minimo_1" required>
+                
+                            <label for="maximo_1">Máximo:</label>
+                            <input type="number" id="maximo_1" name="maximo_1" required>
+                        </div>
                     </div>
-                </div>
+                
+                    <button type="button" id="agregar-oferta">Agregar Oferta</button>
+                    <button type="submit" id="calcular">Calcular</button>
 
-                <button type="button" id="agregar-oferta">Agregar Oferta</button>
-                <button type="button" id="calcular">Calcular</button>
             </div>
         </div>
     </div>
@@ -55,22 +63,21 @@
         const modal = document.getElementById("myModal");
         const btn = document.getElementById("openModal");
         const span = document.getElementsByClassName("close")[0];
-
+    
         btn.onclick = function() {
             modal.style.display = "block";
-            //document.querySelector('.titulo').style.display = "block";
         }
-
+    
         span.onclick = function() {
             modal.style.display = "none";
         }
-
+    
         window.onclick = function(event) {
             if (event.target == modal) {
                 modal.style.display = "none";
             }
         }
-
+    
         // Lógica para agregar más ofertas dinámicamente
         let ofertaCount = 1;
         document.getElementById('agregar-oferta').addEventListener('click', function() {
@@ -79,30 +86,42 @@
             ofertaDiv.classList.add('oferta');
             ofertaDiv.innerHTML = `
                 <label for="precio_${ofertaCount}">Precio:</label>
-                <input type="number" id="precio_${ofertaCount}" required>
-
+                <input type="number" id="precio_${ofertaCount}" name="precio_${ofertaCount}" required>
+    
                 <label for="minimo_${ofertaCount}">Mínimo:</label>
-                <input type="number" id="minimo_${ofertaCount}" required>
-
+                <input type="number" id="minimo_${ofertaCount}" name="minimo_${ofertaCount}" required>
+    
                 <label for="maximo_${ofertaCount}">Máximo:</label>
-                <input type="number" id="maximo_${ofertaCount}" required>
+                <input type="number" id="maximo_${ofertaCount}" name="maximo_${ofertaCount}" required>
             `;
             document.getElementById('ofertas').appendChild(ofertaDiv);
         });
-
+    
         // Lógica para calcular y mostrar resultados
-        document.getElementById('calcular').addEventListener('click', function() {
-            const acciones = document.getElementById('acciones').value;
-            const precioMinimo = document.getElementById('precio_minimo').value;
-            // Aquí puedes agregar la lógica para calcular los resultados
-            // Simulación de resultados
-            document.getElementById('resultado_pd').innerText = `Resultados de Programación Dinámica para ${acciones} acciones y precio mínimo ${precioMinimo}`;
-            document.getElementById('resultado_fb').innerText = `Resultados de Fuerza Bruta para ${acciones} acciones y precio mínimo ${precioMinimo}`;
-            document.getElementById('resultado_voraz').innerText = `Resultados de Solución Voraz para ${acciones} acciones y precio mínimo ${precioMinimo}`;
-            document.getElementById('result').style.display = 'block';
-            modal.style.display = 'none';
+        document.getElementById('subastaForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Evitar el envío del formulario por defecto
+    
+            const formData = new FormData(this);
+    
+            fetch('/subastas_publicas', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('resultado_pd').textContent = data.resultado_pd;
+                document.getElementById('mejor_pd').textContent = data.mejor_pd;
+                document.getElementById('resultado_fb').textContent = data.resultado_fb;
+                document.getElementById('mejor_fb').textContent = data.mejor_fb;
+                document.getElementById('resultado_voraz').textContent = data.resultado_voraz;
+                document.getElementById('mejor_vz').textContent = data.mejor_vz;
+    
+                document.getElementById('result').style.display = 'block';
+                modal.style.display = 'none';
+            })
+            .catch(error => console.error('Error:', error));
         });
-
+    
         function reiniciarConsulta() {
             document.getElementById('result').style.display = 'none';
             document.getElementById('acciones').value = '';
@@ -110,13 +129,13 @@
             document.getElementById('ofertas').innerHTML = `
                 <div class="oferta">
                     <label for="precio_1">Precio:</label>
-                    <input type="number" id="precio_1" required>
-
+                    <input type="number" id="precio_1" name="precio_1" required>
+    
                     <label for="minimo_1">Mínimo:</label>
-                    <input type="number" id="minimo_1" required>
-
+                    <input type="number" id="minimo_1" name="minimo_1" required>
+    
                     <label for="maximo_1">Máximo:</label>
-                    <input type="number" id="maximo_1" required>
+                    <input type="number" id="maximo_1" name="maximo_1" required>
                 </div>
             `;
             ofertaCount = 1;
