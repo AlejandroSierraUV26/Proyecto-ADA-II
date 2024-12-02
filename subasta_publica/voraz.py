@@ -27,6 +27,8 @@ def solucion_voraz(MaxShares, GovernmentBuyoutPrice, num_offers, bidding_offers,
     acciones_restantes = MaxShares - acciones_vendidas
     valor_gobierno = acciones_restantes * GovernmentBuyoutPrice
     total_valor += valor_gobierno
+    # El total de acciones vendidas son las que se compraron
+    
 
     # Mostrar la mejor opción
 

@@ -10,6 +10,7 @@ def index():
 
 @app.route('/terminal_inteligente', methods=['GET', 'POST'])
 def terminal_inteligente():
+    print("Hola")
     if request.method == 'POST':
         palabra1 = request.form.get('palabra1')
         palabra2 = request.form.get('palabra2')
@@ -26,6 +27,10 @@ def terminal_inteligente():
 
         resultado_vz, acciones_vz = vz.solucion_voraz(palabra1, palabra2, costos, acc=2)
         resultado_pd, acciones_pd = pd.solucion_dinamica(palabra1, palabra2, costos, acc=2)
+
+        print(f"FB: {resultado_fb}, {acciones_fb}")
+        print(f"VZ: {resultado_vz}, {acciones_vz}")
+        print(f"PD: {resultado_pd}, {acciones_pd}")
 
         return render_template('terminal_inteligente.html', palabra1=palabra1, palabra2=palabra2,
                                costos=costos, resultado_fb=resultado_fb,
