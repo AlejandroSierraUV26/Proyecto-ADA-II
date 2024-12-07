@@ -35,6 +35,7 @@ La solución debe cumplir las restricciones y optimizar los ingresos totales..
 - Clonar el repositorio:
   
 git clone [URL_del_repositorio]
+
 cd [nombre_del_repositorio]
 
 - Instalar las dependencias Asegúrate de tener instalado Python 3.6+ y ejecuta:
